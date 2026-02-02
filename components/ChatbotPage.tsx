@@ -177,7 +177,7 @@ It’ll take just 2–3 minutes. Shall we begin?`
         setInputText('');
         setIsTyping(true);
 
-        const baseUrl = 'http://127.0.0.1:8000/api/insurance/chat/stream';
+        const baseUrl = 'https://www.citihubkiosk.com/pressgenai/api/insurance/chat/stream';
         const params = new URLSearchParams();
         params.append('session_id', sessionId);
         params.append('message', text);
