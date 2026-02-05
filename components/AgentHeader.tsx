@@ -28,7 +28,7 @@ const AgentHeader: React.FC<AgentHeaderProps> = ({
             className="p-2 hover:bg-gray-100 rounded-xl mr-1 transition-all active:scale-90 flex-shrink-0"
             aria-label="Go back"
           >
-            <i className="fa-solid fa-arrow-left text-[#0055A4]"></i>
+            <i className="fa-solid fa-arrow-left text-[#2563EB]"></i>
           </button>
         )}
 
@@ -56,7 +56,7 @@ const AgentHeader: React.FC<AgentHeaderProps> = ({
           {/* Show Title if present, else show name block */}
           {centerTitle ? (
             <div className="ml-3 text-left">
-              <h2 className="text-sm md:text-lg font-black text-[#0055A4] leading-tight drop-shadow-sm">
+              <h2 className="text-sm md:text-lg font-black text-[#2563EB] leading-tight drop-shadow-sm">
                 {centerTitle}
               </h2>
             </div>
@@ -72,11 +72,12 @@ const AgentHeader: React.FC<AgentHeaderProps> = ({
       </div>
 
       <div className="flex-shrink-0 flex items-center justify-end flex-1">
-        <img
-          src="https://cms-prod.s3.ap-south-1.amazonaws.com/Bajaj_Life_Logo_04298c45f1.png"
-          alt="Bajaj Allianz"
-          className="h-10 md:h-14 w-auto object-contain"
-        />
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 md:w-10 md:h-10 bg-[#2563EB] rounded-lg flex items-center justify-center">
+            <i className="fa-solid fa-shield-halved text-white text-lg md:text-xl"></i>
+          </div>
+          <span className="font-black text-gray-900 text-sm md:text-lg tracking-tighter">Top Advisor</span>
+        </div>
       </div>
     </header>
   );

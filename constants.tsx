@@ -2,7 +2,7 @@
 import React from 'react';
 
 export const AGENT_DETAILS = {
-  name: "Rahul Verma",
+  name: "Varad Joshi",
   designation: "Authorized Insurance Advisor",
   agencyCode: "AG-12345",
   // Professional real person photo for a man in his 40s
@@ -25,25 +25,25 @@ export const PRIORITY_OPTIONS = [
   {
     id: 'retirement',
     label: 'Retirement Planning' as const,
-    icon: <i className="fa-solid fa-umbrella text-3xl mb-2 text-blue-600"></i>,
+    icon: <i className="fa-solid fa-umbrella text-3xl mb-2"></i>,
     description: "Secure your lifestyle for the future."
   },
   {
     id: 'child',
     label: 'Child Education Planning' as const,
-    icon: <i className="fa-solid fa-graduation-cap text-3xl mb-2 text-blue-600"></i>,
+    icon: <i className="fa-solid fa-graduation-cap text-3xl mb-2"></i>,
     description: "Guarantee their academic excellence."
   },
   {
     id: 'savings',
     label: 'Savings' as const,
-    icon: <i className="fa-solid fa-piggy-bank text-3xl mb-2 text-blue-600"></i>,
+    icon: <i className="fa-solid fa-piggy-bank text-3xl mb-2"></i>,
     description: "Grow wealth with guaranteed returns."
   },
   {
     id: 'life',
     label: 'Human Life Value' as const,
-    icon: <i className="fa-solid fa-heart-pulse text-3xl mb-2 text-blue-600"></i>,
+    icon: <i className="fa-solid fa-heart-pulse text-3xl mb-2"></i>,
     description: "Full financial protection for family."
   }
 ];
@@ -51,7 +51,7 @@ export const PRIORITY_OPTIONS = [
 export const MOCK_RESPONSES: Record<string, string[]> = {
   default: [
     "That's a great question. We offer several plans tailored to that need. Would you like to know about the premiums or the benefits first?",
-    "I've shared your interest with Rahul Verma. He can provide a detailed quote shortly. In the meantime, shall we look at the tax-saving components?",
+    "I've shared your interest with Varad Joshi. He can provide a detailed quote shortly. In the meantime, shall we look at the tax-saving components?",
     "Our plans are highly flexible. You can choose to pay monthly, quarterly, or annually. Which suits you best?"
   ],
   'Retirement Planning': [

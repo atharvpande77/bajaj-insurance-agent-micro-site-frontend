@@ -79,7 +79,7 @@ const App: React.FC = () => {
   };
 
   const headerGoal = headerGoalMap[selectedPriority || ''] || 'Financial Goals';
-  const headerTitle = isChatRoute ? `I am Rahul Verma, Let's Plan your ${headerGoal}` : null;
+  const headerTitle = isChatRoute ? `Let's Plan your ${headerGoal}` : null;
 
   const renderContent = () => {
     if (isChatRoute) {
@@ -116,7 +116,7 @@ const App: React.FC = () => {
             <span className="hover:text-white cursor-pointer">Contact Us</span>
           </div>
           <p className="text-[10px]">
-            © 2024 Bajaj Allianz General Insurance Co. Ltd. | IRDAI Reg. No. 113
+            © 2024 Top Advisor Insurance Co. Ltd. | IRDAI Reg. No. 000
           </p>
         </footer>
       )}

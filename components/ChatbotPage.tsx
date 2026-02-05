@@ -77,42 +77,46 @@ export default function ChatbotPage({ priority }: ChatbotPageProps) {
         setInputText('');
 
         // 4. Set Initial Welcome Message based on priority
-        const retirementMsg = `👋 Hi  
-I'm the digital assistant for Mr. Rahul Verma, a licensed life insurance advisor with Bajaj Life Insurance, with over 7 years of experience.
-
-📋 **Just so you know:** This is for awareness and education only. All numbers are indicative and based on your inputs. No actual selling - just helpful guidance.
-
-Before we begin, please choose your language:
-🇬🇧 English / 🇮🇳 Hindi / 🇮🇳 Marathi?`;
-
         const welcomeMessages: Record<string, string> = {
-            'Retirement Planning': retirementMsg,
-            'Savings': retirementMsg,
-            'Child Education Planning': `Hello! I'm here to help you plan for your child's education. Let's explore the best options for their future.
+            'Retirement Planning': `👋 Hello!
+I am the digital assistant for Mr. Varad Joshi, a renowned financial planner.
+I will help you plan your retirement in a simple and structured way.
 
-📋 **Just so you know:** This is for awareness and education only. All numbers are indicative and based on your inputs. No actual selling - just helpful guidance.
+Please choose your preferred language:
+English | Hindi | Marathi`,
 
-May I know your name please?`,
-            'Human Life Value': `👋 Hello  
+            'Child Education Planning': `👋 Hello!
+I am the digital assistant for Mr. Varad Joshi, a renowned financial planner.
+I will help you plan your child's education in a simple and structured way.
 
-I’m the digital assistant for Mr. Rahul Verma, a licensed life insurance advisor with Bajaj Life Insurance, with over 7 years of experience.
+Please choose your preferred language:
+English | Hindi | Marathi`,
 
-📋 **Just so you know:** This is for awareness and education only. All numbers are indicative and based on your inputs. No actual selling - just helpful guidance.
+            'Human Life Value': `👋 Hello!
+I am the digital assistant for Mr. Varad Joshi, a renowned financial planner.
+I will help you plan your term insurance in a simple and structured way.
 
-Before we begin, which language are you most comfortable with?
-English / Hindi / Marathi`,
-            'Tax Planning': `Hi! 👋  
+Please choose your preferred language:
+English | Hindi | Marathi`,
 
-I’m the digital assistant for Mr. Rahul Verma, a licensed life insurance advisor with Bajaj Life Insurance, with over 7 years of experience.
+            'Tax Planning': `👋 Hello!
+I am the digital assistant for Mr. Varad Joshi, a renowned financial planner.
+I will help you plan your taxes in a simple and structured way.
 
-📋 **Just so you know:** This is for awareness and education only. All numbers are indicative and based on your inputs. No actual selling - just helpful guidance.
+Please choose your preferred language:
+English | Hindi | Marathi`,
 
-It’ll take just 2–3 minutes. Shall we begin?`
+            'Savings': `👋 Hello!
+I am the digital assistant for Mr. Varad Joshi, a renowned financial planner.
+I will help you plan your savings in a simple and structured way.
+
+Please choose your preferred language:
+English | Hindi | Marathi`
         };
 
         const initialMsg: Message = {
             id: `welcome-${Date.now()}`,
-            text: welcomeMessages[effectivePriority || ''] || "Hi! I'm your Bajaj AI assistant. How can I help you with your insurance goals today?",
+            text: welcomeMessages[effectivePriority || ''] || "Hi! I'm your Top Advisor AI assistant. How can I help you with your insurance goals today?",
             sender: 'ai',
             timestamp: new Date()
         };
@@ -309,7 +313,7 @@ It’ll take just 2–3 minutes. Shall we begin?`
         <div className="flex flex-col h-full w-full bg-slate-50 relative overflow-hidden">
             {/* Branded Blue Header - Collapsible */}
             <div
-                className={`sticky top-0 z-20 bg-[#0055A4] border-b border-[#004488] py-4 px-4 flex items-center justify-between shadow-md transition-transform duration-300 ease-in-out ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+                className={`sticky top-0 z-20 bg-[#2563EB] border-b border-[#1E40AF] py-4 px-4 flex items-center justify-between shadow-md transition-transform duration-300 ease-in-out ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
                     }`}
             >
                 <div className="flex items-center gap-3">
@@ -348,18 +352,18 @@ It’ll take just 2–3 minutes. Shall we begin?`
                         >
                             {/* AI Avatar */}
                             {msg.sender === 'ai' && (
-                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#0055A4] to-[#003377] flex items-center justify-center text-white shadow-sm mt-1 ring-2 ring-white">
+                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1E40AF] flex items-center justify-center text-white shadow-sm mt-1 ring-2 ring-white">
                                     <i className="fa-solid fa-robot text-xs"></i>
                                 </div>
                             )}
 
                             <div
                                 className={`max-w-[85%] sm:max-w-[75%] px-5 py-3.5 rounded-2xl shadow-sm border ${msg.sender === 'user'
-                                    ? 'bg-[#0055A4] text-white rounded-br-none border-transparent'
+                                    ? 'bg-[#2563EB] text-white rounded-br-none border-transparent'
                                     : 'bg-white text-gray-800 rounded-bl-none border-gray-100'
                                     }`}
                             >
-                                <div className={`text-[15px] leading-7 ${msg.sender === 'user' ? 'text-white/95' : 'text-gray-800'}`}>
+                                <div className={`text-[15px] leading-7 whitespace-pre-wrap ${msg.sender === 'user' ? 'text-white/95' : 'text-gray-800'}`}>
                                     {renderMessageText(msg.text) || (msg.sender === 'ai' && isTyping && messages[messages.length - 1].id === msg.id ? '...' : '')}
                                 </div>
                                 <p className={`text-[10px] mt-2 opacity-60 font-medium ${msg.sender === 'user' ? 'text-right text-blue-100' : 'text-left text-gray-400'}`}>
@@ -372,7 +376,7 @@ It’ll take just 2–3 minutes. Shall we begin?`
                     {/* Typing Indicator */}
                     {isTyping && messages[messages.length - 1]?.text === '' && (
                         <div className="flex gap-4 justify-start">
-                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#0055A4] to-[#003377] flex items-center justify-center text-white shadow-sm mt-1 ring-2 ring-white">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1E40AF] flex items-center justify-center text-white shadow-sm mt-1 ring-2 ring-white">
                                 <i className="fa-solid fa-robot text-xs"></i>
                             </div>
                             <div className="px-5 py-4 bg-white border border-gray-100 rounded-2xl rounded-bl-none shadow-sm flex items-center gap-1.5 h-[52px]">
@@ -413,7 +417,7 @@ It’ll take just 2–3 minutes. Shall we begin?`
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSend(inputText)}
-                            placeholder={isTyping ? "Thinking..." : "Message Bajaj Assistant..."}
+                            placeholder={isTyping ? "Thinking..." : "Message Top Advisor Assistant..."}
                             disabled={isTyping}
                             className="flex-1 bg-transparent border-none focus:ring-0 text-gray-800 placeholder-gray-400 text-base py-2 px-2 disabled:cursor-not-allowed"
                             autoComplete="off"
@@ -423,7 +427,7 @@ It’ll take just 2–3 minutes. Shall we begin?`
                             onClick={() => handleSend(inputText)}
                             disabled={!inputText.trim() || isTyping}
                             className={`w - 10 h - 10 rounded - full flex items - center justify - center transition - all flex - shrink - 0 ${inputText.trim() && !isTyping
-                                ? 'bg-[#0055A4] text-white shadow-md hover:bg-blue-700 active:scale-95'
+                                ? 'bg-[#2563EB] text-white shadow-md hover:bg-blue-700 active:scale-95'
                                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                                 } `}
                         >
