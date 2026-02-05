@@ -36,6 +36,7 @@ export default function ChatbotPage({ priority }: ChatbotPageProps) {
     const [isListening, setIsListening] = useState(false);
     const [isGoalSent, setIsGoalSent] = useState(false);
     const [sessionId, setSessionId] = useState('');
+    const [isCopied, setIsCopied] = useState(false);
 
     const chatEndRef = useRef<HTMLDivElement>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -309,6 +310,18 @@ English | Hindi | Marathi`
         return () => container.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const handleShareWhatsApp = () => {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent(`Check out this Top Advisor AI Assistant for ${effectivePriority + ' Planning' || 'Financial Planning'}:\n\n`);
+        window.open(`https://wa.me/?text=${text}${url}`, '_blank');
+    };
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(window.location.href);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+    };
+
     return (
         <div className="flex flex-col h-full w-full bg-slate-50 relative overflow-hidden">
             {/* Branded Blue Header - Collapsible */}
@@ -326,9 +339,30 @@ English | Hindi | Marathi`
                         </h2>
                         <span className="text-[10px] text-blue-200 font-medium tracking-wide uppercase">AI Goal Assistant</span>
                     </div>
+
+                    <div className="flex items-center gap-2 ml-2">
+                        <button
+                            onClick={handleShareWhatsApp}
+                            className="w-8 h-8 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-900/20 hover:scale-105 transition-all duration-300 group"
+                            title="Share on WhatsApp"
+                        >
+                             <i className="fa-brands fa-whatsapp text-sm"></i>
+                        </button>
+                        <button
+                            onClick={handleCopyLink}
+                            className="w-8 h-8 bg-white hover:bg-gray-100 text-[#2563EB] rounded-full flex items-center justify-center shadow-lg hover:shadow-white/20 hover:scale-105 transition-all duration-300 relative"
+                            title="Copy Link"
+                        >
+                            {isCopied ? (
+                                <i className="fa-solid fa-check text-green-600 text-sm"></i>
+                            ) : (
+                                <i className="fa-solid fa-link text-sm"></i>
+                            )}
+                        </button>
+                    </div>
                 </div>
 
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 flex items-center gap-1">
                     <button
                         onClick={() => startNewChat()}
                         className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all active:rotate-180 duration-500"
