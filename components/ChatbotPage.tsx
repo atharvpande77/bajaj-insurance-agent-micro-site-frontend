@@ -182,7 +182,7 @@ English | Hindi | Marathi`
         setInputText('');
         setIsTyping(true);
 
-        const baseUrl = 'http://localhost:8000/api/insurance/chat/stream';
+        const baseUrl = 'https://www.citihubkiosk.com/pressgenai/api/insurance/chat/stream';
         const params = new URLSearchParams();
         params.append('session_id', sessionId);
         params.append('message', text);
