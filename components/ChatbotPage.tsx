@@ -182,7 +182,7 @@ English | Hindi | Marathi`
         setInputText('');
         setIsTyping(true);
 
-        const baseUrl = 'https://www.citihubkiosk.com/pressgenai/api/insurance/chat/stream';
+        const baseUrl = 'http://localhost:8000/api/insurance/chat/stream';
         const params = new URLSearchParams();
         params.append('session_id', sessionId);
         params.append('message', text);
@@ -346,7 +346,7 @@ English | Hindi | Marathi`
                             className="w-8 h-8 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-900/20 hover:scale-105 transition-all duration-300 group"
                             title="Share on WhatsApp"
                         >
-                             <i className="fa-brands fa-whatsapp text-sm"></i>
+                            <i className="fa-brands fa-whatsapp text-sm"></i>
                         </button>
                         <button
                             onClick={handleCopyLink}

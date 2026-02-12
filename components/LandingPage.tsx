@@ -69,7 +69,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSelectPriority }) => {
           </div>
 
           {/* Tax Planning Highlight */}
-          <div className="flex justify-center mb-12">
+          {/* <div className="flex justify-center mb-12">
             <button
               onClick={() => onSelectPriority('Tax Planning')}
               className="relative overflow-hidden w-full max-w-2xl bg-gradient-to-r from-blue-900 to-[#2563EB] text-white p-8 rounded-[2rem] shadow-2xl hover:shadow-blue-200 hover:-translate-y-1 transition-all duration-300 group text-center border-4 border-transparent hover:border-blue-200/30"
@@ -90,7 +90,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSelectPriority }) => {
                 </div>
               </div>
             </button>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {PRIORITY_OPTIONS.map((option) => (
