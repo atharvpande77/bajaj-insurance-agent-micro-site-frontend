@@ -41,6 +41,7 @@ export default function ChatbotPage({ priority }: ChatbotPageProps) {
     const chatEndRef = useRef<HTMLDivElement>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const eventSourceRef = useRef<EventSource | null>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
 
     // Track if usage just triggered a send to force scroll
     const userJustSentRef = useRef(false);
@@ -154,6 +155,13 @@ English | Hindi | Marathi`
             if (isNearBottom) {
                 chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+    }, [messages, isTyping]);
+
+    // Always keep the input focused
+    useEffect(() => {
+        if (!isTyping) {
+            inputRef.current?.focus();
         }
     }, [messages, isTyping]);
 
@@ -434,36 +442,55 @@ English | Hindi | Marathi`
                         </div>
                     )}
 
-                    <div className="relative flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full p-2 pl-4 shadow-sm hover:shadow-md transition-shadow focus-within:ring-2 focus-within:ring-blue-100 focus-within:border-blue-400">
+                    <div className="relative flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-3xl p-1.5 px-2 shadow-sm hover:shadow-md transition-shadow focus-within:ring-2 focus-within:ring-blue-100 focus-within:border-blue-400">
 
                         <button
                             onClick={handleMockVoice}
                             disabled={isTyping}
-                            className={`p - 2 rounded - full transition - colors flex - shrink - 0 ${isTyping ? 'text-gray-300' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-700'
-                                } `}
+                            className={`w-10 h-10 rounded-full transition-colors flex items-center justify-center flex-shrink-0 ${isTyping ? 'text-gray-300' : 'text-gray-500 hover:bg-gray-200 hover:text-gray-700'
+                                }`}
                             title="Voice Input"
                         >
                             <i className="fa-solid fa-microphone text-lg"></i>
                         </button>
 
-                        <input
-                            type="text"
+                        <textarea
+                            ref={inputRef}
+                            rows={1}
                             value={inputText}
-                            onChange={(e) => setInputText(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && handleSend(inputText)}
+                            onChange={(e) => {
+                                setInputText(e.target.value);
+                                // Auto-resize
+                                e.target.style.height = 'auto';
+                                e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleSend(inputText);
+                                    // Reset height after send
+                                    e.currentTarget.style.height = 'auto';
+                                }
+                                // Shift+Enter: default behavior adds newline
+                            }}
                             placeholder={isTyping ? "Thinking..." : "Message Top Advisor Assistant..."}
                             disabled={isTyping}
-                            className="flex-1 bg-transparent border-none focus:ring-0 text-gray-800 placeholder-gray-400 text-base py-2 px-2 disabled:cursor-not-allowed"
+                            autoFocus
+                            className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-gray-800 placeholder-gray-400 text-base py-2 px-2 disabled:cursor-not-allowed resize-none overflow-hidden leading-6"
                             autoComplete="off"
+                            style={{ minHeight: '40px', maxHeight: '120px' }}
                         />
 
                         <button
-                            onClick={() => handleSend(inputText)}
+                            onClick={() => {
+                                handleSend(inputText);
+                                if (inputRef.current) inputRef.current.style.height = 'auto';
+                            }}
                             disabled={!inputText.trim() || isTyping}
-                            className={`w - 10 h - 10 rounded - full flex items - center justify - center transition - all flex - shrink - 0 ${inputText.trim() && !isTyping
+                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all flex-shrink-0 ${inputText.trim() && !isTyping
                                 ? 'bg-[#2563EB] text-white shadow-md hover:bg-blue-700 active:scale-95'
                                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                                } `}
+                                }`}
                         >
                             {isTyping ? <i className="fa-solid fa-spinner animate-spin"></i> : <i className="fa-solid fa-arrow-up"></i>}
                         </button>
