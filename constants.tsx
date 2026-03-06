@@ -3,7 +3,7 @@ import React from 'react';
 
 export const AGENT_DETAILS = {
   name: "Varad Joshi",
-  designation: "Authorized Insurance Advisor",
+  designation: "Financial Planner",
   agencyCode: "AG-12345",
   // Professional real person photo for a man in his 40s
   avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=128&h=128",
@@ -27,24 +27,6 @@ export const PRIORITY_OPTIONS = [
     label: 'Retirement Planning' as const,
     icon: <i className="fa-solid fa-umbrella text-3xl mb-2"></i>,
     description: "Secure your lifestyle for the future."
-  },
-  {
-    id: 'child',
-    label: 'Child Education Planning' as const,
-    icon: <i className="fa-solid fa-graduation-cap text-3xl mb-2"></i>,
-    description: "Guarantee their academic excellence."
-  },
-  {
-    id: 'savings',
-    label: 'Savings' as const,
-    icon: <i className="fa-solid fa-piggy-bank text-3xl mb-2"></i>,
-    description: "Grow wealth with guaranteed returns."
-  },
-  {
-    id: 'life',
-    label: 'Human Life Value' as const,
-    icon: <i className="fa-solid fa-heart-pulse text-3xl mb-2"></i>,
-    description: "Full financial protection for family."
   }
 ];
 

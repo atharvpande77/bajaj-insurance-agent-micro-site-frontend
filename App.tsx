@@ -110,11 +110,7 @@ const App: React.FC = () => {
           <p className="text-[10px] md:text-xs uppercase tracking-widest mb-4">
             Insurance is the subject matter of solicitation.
           </p>
-          <div className="flex justify-center gap-4 text-sm mb-4">
-            <span className="hover:text-white cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-white cursor-pointer">Terms & Conditions</span>
-            <span className="hover:text-white cursor-pointer">Contact Us</span>
-          </div>
+
           <p className="text-[10px]">
             © 2024 Top Advisor Insurance Co. Ltd. | IRDAI Reg. No. 000
           </p>

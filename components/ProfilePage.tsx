@@ -50,9 +50,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onClose }) => {
 
             <div className="inline-flex flex-wrap justify-center gap-3">
               <div className="px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-xs font-black tracking-wider uppercase">
-                Agency ID: {AGENT_DETAILS.agencyCode}
-              </div>
-              <div className="px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-xs font-black tracking-wider uppercase">
                 {AGENT_DETAILS.experience} Experience
               </div>
             </div>

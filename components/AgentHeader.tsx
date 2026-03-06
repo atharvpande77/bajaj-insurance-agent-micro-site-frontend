@@ -65,18 +65,15 @@ const AgentHeader: React.FC<AgentHeaderProps> = ({
               <h1 className={`text-sm font-black leading-tight ${isProfileActive ? 'text-blue-600' : 'text-gray-900'}`}>
                 {AGENT_DETAILS.name}
               </h1>
-              <p className="text-[10px] text-gray-500 font-bold uppercase tracking-tighter">Advisor • {AGENT_DETAILS.agencyCode}</p>
+              <p className="text-[10px] text-gray-500 font-bold uppercase tracking-tighter">Financial Planner</p>
             </div>
           )}
         </button>
       </div>
 
       <div className="flex-shrink-0 flex items-center justify-end flex-1">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 md:w-10 md:h-10 bg-[#2563EB] rounded-lg flex items-center justify-center">
-            <i className="fa-solid fa-shield-halved text-white text-lg md:text-xl"></i>
-          </div>
-          <span className="font-black text-gray-900 text-sm md:text-lg tracking-tighter">Top Advisor</span>
+        <div className="bg-white p-1.5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-center">
+          <img src="/logo.svg" alt="TopAdvisor Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
         </div>
       </div>
     </header>

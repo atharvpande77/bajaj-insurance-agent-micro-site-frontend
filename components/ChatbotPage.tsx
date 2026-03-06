@@ -37,6 +37,7 @@ export default function ChatbotPage({ priority }: ChatbotPageProps) {
     const [isGoalSent, setIsGoalSent] = useState(false);
     const [sessionId, setSessionId] = useState('');
     const [isCopied, setIsCopied] = useState(false);
+    const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
 
     const chatEndRef = useRef<HTMLDivElement>(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -164,6 +165,12 @@ English | Hindi | Marathi`
             inputRef.current?.focus();
         }
     }, [messages, isTyping]);
+
+    const handleCopyMessage = (id: string, text: string) => {
+        navigator.clipboard.writeText(text);
+        setCopiedMessageId(id);
+        setTimeout(() => setCopiedMessageId(null), 2000);
+    };
 
     const handleSend = (text: string) => {
         if (!text.trim() || isTyping) return;
@@ -334,7 +341,7 @@ English | Hindi | Marathi`
         <div className="flex flex-col h-full w-full bg-slate-50 relative overflow-hidden">
             {/* Branded Blue Header - Collapsible */}
             <div
-                className={`sticky top-0 z-20 bg-[#2563EB] border-b border-[#1E40AF] py-4 px-4 flex items-center justify-between shadow-md transition-transform duration-300 ease-in-out ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+                className={`absolute top-0 left-0 w-full z-20 bg-[#2563EB] border-b border-[#1E40AF] py-4 px-4 flex items-center justify-between shadow-md transition-transform duration-300 ease-in-out ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
                     }`}
             >
                 <div className="flex items-center gap-3">
@@ -384,36 +391,57 @@ English | Hindi | Marathi`
             {/* Message List */}
             <div
                 ref={scrollContainerRef}
-                className="flex-1 px-4 py-8 space-y-8 scroll-smooth overflow-y-auto"
+                className="flex-1 px-4 pt-[104px] pb-8 space-y-8 scroll-smooth overflow-y-auto w-full h-full"
             >
                 <div className="max-w-3xl mx-auto space-y-6">
-                    {messages.map((msg) => (
-                        <div
-                            key={msg.id}
-                            className={`flex gap-4 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                        >
-                            {/* AI Avatar */}
-                            {msg.sender === 'ai' && (
-                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1E40AF] flex items-center justify-center text-white shadow-sm mt-1 ring-2 ring-white">
-                                    <i className="fa-solid fa-robot text-xs"></i>
-                                </div>
-                            )}
+                    {messages.map((msg) => {
+                        // Skip rendering empty AI messages while typing, as the animated indicator below handles it
+                        if (msg.sender === 'ai' && msg.text === '' && isTyping) return null;
 
+                        return (
                             <div
-                                className={`max-w-[85%] sm:max-w-[75%] px-5 py-3.5 rounded-2xl shadow-sm border ${msg.sender === 'user'
-                                    ? 'bg-[#2563EB] text-white rounded-br-none border-transparent'
-                                    : 'bg-white text-gray-800 rounded-bl-none border-gray-100'
-                                    }`}
+                                key={msg.id}
+                                className={`flex gap-4 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                             >
-                                <div className={`text-[15px] leading-7 whitespace-pre-wrap ${msg.sender === 'user' ? 'text-white/95' : 'text-gray-800'}`}>
-                                    {renderMessageText(msg.text) || (msg.sender === 'ai' && isTyping && messages[messages.length - 1].id === msg.id ? '...' : '')}
+                                {/* AI Avatar */}
+                                {msg.sender === 'ai' && (
+                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1E40AF] flex items-center justify-center text-white shadow-sm mt-1 ring-2 ring-white">
+                                        <i className="fa-solid fa-robot text-xs"></i>
+                                    </div>
+                                )}
+
+                                <div className="flex flex-col gap-1 max-w-[85%] sm:max-w-[75%]">
+                                    <div
+                                        className={`px-5 py-3.5 rounded-2xl shadow-sm border ${msg.sender === 'user'
+                                            ? 'bg-[#2563EB] text-white rounded-br-none border-transparent'
+                                            : 'bg-white text-gray-800 rounded-bl-none border-gray-100'
+                                            }`}
+                                    >
+                                        <div className={`text-[15px] leading-7 whitespace-pre-wrap ${msg.sender === 'user' ? 'text-white/95' : 'text-gray-800'}`}>
+                                            {renderMessageText(msg.text) || (msg.sender === 'ai' && isTyping && messages[messages.length - 1].id === msg.id ? '...' : '')}
+                                        </div>
+                                    </div>
+                                    {/* Moved Outside */}
+                                    <div className={`flex items-center gap-3 px-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                        <p className="text-[10px] text-gray-400 font-medium tracking-wide">
+                                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </p>
+                                        <button
+                                            onClick={() => handleCopyMessage(msg.id, msg.text)}
+                                            className={`p-1.5 transition-colors rounded hover:bg-gray-200/50 flex items-center justify-center text-gray-400 hover:text-[#2563EB]`}
+                                            title="Copy message"
+                                        >
+                                            {copiedMessageId === msg.id ? (
+                                                <i className="fa-solid fa-check text-green-500 text-sm"></i>
+                                            ) : (
+                                                <i className="fa-regular fa-copy text-sm"></i>
+                                            )}
+                                        </button>
+                                    </div>
                                 </div>
-                                <p className={`text-[10px] mt-2 opacity-60 font-medium ${msg.sender === 'user' ? 'text-right text-blue-100' : 'text-left text-gray-400'}`}>
-                                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                </p>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
 
                     {/* Typing Indicator */}
                     {isTyping && messages[messages.length - 1]?.text === '' && (

@@ -12,6 +12,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSelectPriority }) => {
     <div className="animate-fadeIn">
       {/* Personalized Hero Section */}
       <section className="relative h-96 md:h-[500px] overflow-hidden bg-[#2563EB] flex items-center">
+
         {/* Background Real Person Photo */}
         <div className="absolute inset-0 z-0">
           <img
@@ -63,55 +64,33 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSelectPriority }) => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-              What is your priority today?
+              Your Path to a Secure Future
             </h3>
-            <p className="text-gray-500 font-medium text-lg">Select a goal to explore tailored AI-generated insights for your future.</p>
+            <p className="text-gray-500 font-medium text-lg">Explore tailored AI-generated insights to ensure a comfortable and worry-free retirement.</p>
           </div>
 
-          {/* Tax Planning Highlight */}
-          {/* <div className="flex justify-center mb-12">
+          {/* Retirement Planning Highlight */}
+          <div className="flex justify-center mb-12">
             <button
-              onClick={() => onSelectPriority('Tax Planning')}
+              onClick={() => onSelectPriority('Retirement Planning')}
               className="relative overflow-hidden w-full max-w-2xl bg-gradient-to-r from-blue-900 to-[#2563EB] text-white p-8 rounded-[2rem] shadow-2xl hover:shadow-blue-200 hover:-translate-y-1 transition-all duration-300 group text-center border-4 border-transparent hover:border-blue-200/30"
             >
               <div className="absolute -right-10 -bottom-10 opacity-10">
-                <i className="fa-solid fa-file-invoice-dollar text-9xl transform rotate-12"></i>
+                <i className="fa-solid fa-umbrella text-9xl transform rotate-12"></i>
               </div>
               <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
                 <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm group-hover:bg-white/20 transition-colors shrink-0">
-                  <i className="fa-solid fa-file-invoice-dollar text-3xl"></i>
+                  <i className="fa-solid fa-umbrella text-3xl"></i>
                 </div>
                 <div className="text-center md:text-left">
-                  <h4 className="text-2xl font-black mb-1">Detailed Tax Planning</h4>
-                  <p className="text-blue-100 font-medium">Maximize savings with smart tax strategies. Essential for every portfolio.</p>
+                  <h4 className="text-2xl font-black mb-1">Retirement Planning</h4>
+                  <p className="text-blue-100 font-medium">Secure your lifestyle for the future.</p>
                 </div>
                 <div className="hidden md:block bg-white text-[#2563EB] px-6 py-3 rounded-xl font-black text-sm uppercase tracking-wider group-hover:scale-105 transition-transform shrink-0">
                   Start Now <i className="fa-solid fa-arrow-right ml-2"></i>
                 </div>
               </div>
             </button>
-          </div> */}
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PRIORITY_OPTIONS.map((option) => (
-              <button
-                key={option.id}
-                onClick={() => onSelectPriority(option.label)}
-                className="flex flex-col items-center justify-center p-10 bg-white rounded-[2.5rem] shadow-[0_15px_50px_-15px_rgba(0,0,0,0.1)] border border-gray-100 hover:border-[#2563EB] hover:shadow-2xl hover:shadow-blue-100 transition-all active:scale-95 group text-center"
-              >
-                <div className="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center mb-6 text-[#2563EB] group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300">
-                  <div className="transform group-hover:scale-110 transition-transform">
-                    {option.icon}
-                  </div>
-                </div>
-                <span className="text-xl font-black text-gray-900 group-hover:text-[#2563EB] transition-colors">
-                  {option.label}
-                </span>
-                <p className="text-sm text-gray-500 mt-4 leading-relaxed font-medium">
-                  {option.description}
-                </p>
-              </button>
-            ))}
           </div>
         </div>
       </main>
